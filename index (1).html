@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TribalSetu — unified scholarship platform for tribal students">
+<title>TribalSetu | Unified Scholarship Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1f33; --blue:#0866c6; --blue2:#0b84f3; --cyan:#11b7c9;
+  --ink:#14202b; --muted:#687888; --line:#e5edf4; --bg:#f5f8fb; --card:#fff;
+  --green:#15966b; --amber:#c98213; --red:#c94b4b; --shadow:0 18px 50px rgba(20,48,75,.08);
+  --radius:20px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--bg)}
+button,input{font:inherit}.app{min-height:100vh;display:flex}
+.sidebar{width:258px;background:var(--navy);color:#dce9f5;position:fixed;inset:0 auto 0 0;padding:22px 16px;display:flex;flex-direction:column;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 10px 28px}
+.brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#20c8d7,#0870d6);display:grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 8px 24px #0003}
+.brand strong{font-family:Manrope;font-size:18px;color:white}.brand span{display:block;color:#9fb5c9;font-size:11px;margin-top:2px}
+.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#aebfd0;text-align:left;padding:12px 13px;border-radius:12px;cursor:pointer;display:flex;gap:12px;align-items:center}
+.nav button:hover,.nav button.active{background:#ffffff12;color:#fff}.nav .ico{width:22px;text-align:center}
+.side-bottom{margin-top:auto;border-top:1px solid #ffffff12;padding-top:15px}.profile{display:flex;gap:10px;align-items:center;padding:10px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#d8efff;color:#0759a8;display:grid;place-items:center;font-weight:700}
+.profile small{display:block;color:#89a2b8}.profile b{font-size:13px;color:#fff}
+.main{margin-left:258px;min-height:100vh;width:calc(100% - 258px)}
+.topbar{height:74px;background:#ffffffdc;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:10}
+.breadcrumb{font-size:13px;color:var(--muted)}.breadcrumb b{color:var(--ink)}
+.top-actions{display:flex;gap:10px;align-items:center}.icon-btn{border:1px solid var(--line);background:#fff;width:40px;height:40px;border-radius:12px;cursor:pointer}
+.container{max-width:1280px;margin:auto;padding:34px}
+.page{display:none}.page.active{display:block}
+h1,h2,h3{font-family:Manrope;margin:0}.hero{background:linear-gradient(120deg,#082b4b,#0874d4);color:#fff;border-radius:28px;padding:34px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;border:1px solid #ffffff25;right:-120px;top:-130px;box-shadow:0 0 0 50px #ffffff09,0 0 0 100px #ffffff06}
+.hero h1{font-size:32px;max-width:670px;position:relative;z-index:1}.hero p{max-width:650px;color:#d5e8f8;line-height:1.65;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;background:#ffffff18;border:1px solid #ffffff24;font-size:12px;margin-bottom:16px}
+.cta-row{display:flex;gap:10px;margin-top:20px;position:relative;z-index:1}.btn{border:0;border-radius:12px;padding:11px 16px;cursor:pointer;font-weight:700}.btn.primary{background:#fff;color:#075da9}.btn.ghost{background:#ffffff14;color:#fff;border:1px solid #ffffff35}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px #163c5b08}.stat{padding:19px}.stat .label{color:var(--muted);font-size:12px}.stat strong{display:block;font:800 26px Manrope;margin:6px 0}.trend{font-size:12px;color:var(--green)}
+.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}.section-head{display:flex;align-items:end;justify-content:space-between;margin:28px 0 14px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.link{border:0;background:none;color:var(--blue);font-weight:700;cursor:pointer}
+.card{padding:22px}.progress{height:8px;background:#edf2f6;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue2),var(--cyan));border-radius:20px}
+.timeline{display:grid;gap:0;margin-top:15px}.step{display:grid;grid-template-columns:26px 1fr;gap:10px;position:relative;padding-bottom:19px}.step:before{content:"";position:absolute;left:12px;top:26px;width:2px;height:calc(100% - 18px);background:#dfe8ef}.step:last-child:before{display:none}.dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eaf2f8;color:#63809a;font-size:12px;z-index:1}.done .dot{background:#dcf5eb;color:var(--green)}.current .dot{background:#e2f0ff;color:var(--blue)}
+.step b{font-size:13px}.step small{display:block;color:var(--muted);margin-top:3px}
+.scheme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.scheme{padding:20px;border:1px solid var(--line);border-radius:18px;background:#fff;transition:.2s}.scheme:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.scheme-icon{width:42px;height:42px;border-radius:13px;background:#eaf4ff;color:var(--blue);display:grid;place-items:center;font-size:20px;margin-bottom:15px}.scheme h3{font-size:16px}.scheme p{font-size:12px;color:var(--muted);line-height:1.55}.scheme .tag{font-size:11px;color:var(--green);font-weight:700}
+.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line);font-size:13px}.table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}.status{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;display:inline-block}.approved{background:#e4f7ef;color:var(--green)}.review{background:#fff3dc;color:var(--amber)}.pending{background:#e9f2ff;color:var(--blue)}
+.alert{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.alert:last-child{border:0}.alert-icon{width:34px;height:34px;border-radius:10px;background:#fff3dc;display:grid;place-items:center}.alert b{font-size:13px}.alert p{font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.45}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{padding:20px}.feature .n{font:800 12px Manrope;color:var(--blue);margin-bottom:12px}.feature h3{font-size:16px;margin-bottom:7px}.feature p{font-size:12px;color:var(--muted);line-height:1.55;margin:0}
+.arch{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}.arch-box{background:#fff;border:1px solid var(--line);padding:16px 10px;border-radius:15px;text-align:center;font-size:12px;font-weight:700}.arrow{text-align:center;color:#8aa1b3}
+.jago{position:fixed;right:24px;bottom:24px;z-index:30}.jago button{width:62px;height:62px;border:0;border-radius:50%;background:linear-gradient(135deg,#0b83f2,#11b7c9);color:#fff;font-size:24px;box-shadow:0 16px 35px #0874d455;cursor:pointer}.chat{display:none;position:absolute;right:0;bottom:75px;width:330px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 25px 70px #12334a25;overflow:hidden}.chat.open{display:block}.chat-head{padding:15px;background:var(--navy);color:#fff}.chat-head b{font-family:Manrope}.chat-body{height:260px;padding:14px;overflow:auto;background:#f7fafc}.msg{max-width:85%;padding:9px 11px;border-radius:12px;font-size:12px;line-height:1.45;margin-bottom:9px}.bot{background:#eaf3fb}.me{background:#0b76d6;color:#fff;margin-left:auto}.chat-input{display:flex;padding:10px;border-top:1px solid var(--line);gap:7px}.chat-input input{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px}.chat-input button{border:0;border-radius:10px;background:var(--blue);color:#fff;width:42px}
+.toast{position:fixed;top:86px;right:24px;background:#0d2237;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:40;font-size:13px}
+.search{display:flex;gap:10px;margin-bottom:18px}.search input{flex:1;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.checklist{display:grid;gap:10px}.check{display:flex;align-items:center;gap:10px;font-size:13px}.check input{accent-color:var(--blue)}
+@media(max-width:1000px){.sidebar{width:76px}.brand div:not(.brand-mark),.nav span:not(.ico),.side-bottom .profile div{display:none}.brand{justify-content:center;padding:4px 0 28px}.nav button{justify-content:center}.main{margin-left:76px;width:calc(100% - 76px)}.stats{grid-template-columns:repeat(2,1fr)}.grid2,.scheme-grid,.feature-grid{grid-template-columns:1fr}.arch{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+@media(max-width:650px){.topbar{padding:0 16px}.container{padding:18px}.hero{padding:25px}.hero h1{font-size:25px}.stats{grid-template-columns:1fr}.table{min-width:620px}.card.table-wrap{overflow:auto}.jago{right:15px;bottom:15px}.chat{width:min(330px,calc(100vw - 30px))}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">TS</div><div><strong>TribalSetu</strong><span>Unified Scholarship Platform</span></div></div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard"><span class="ico">⌂</span><span>Dashboard</span></button>
+    <button data-page="schemes"><span class="ico">◈</span><span>Scholarship Schemes</span></button>
+    <button data-page="applications"><span class="ico">✓</span><span>My Applications</span></button>
+    <button data-page="documents"><span class="ico">▣</span><span>Documents</span></button>
+    <button data-page="payments"><span class="ico">₹</span><span>Payments</span></button>
+    <button data-page="alerts"><span class="ico">♢</span><span>Alerts</span></button>
+    <button data-page="ministry"><span class="ico">▤</span><span>Ministry View</span></button>
+    <button data-page="about"><span class="ico">i</span><span>How TribalSetu Works</span></button>
+  </nav>
+  <div class="side-bottom"><div class="profile"><div class="avatar">A</div><div><b>Student Account</b><small>Demo profile</small></div></div></div>
+</aside>
+
+<main class="main">
+<header class="topbar"><div class="breadcrumb">TribalSetu / <b id="crumb">Dashboard</b></div><div class="top-actions"><button class="icon-btn" onclick="showToast('No new critical notifications')">♢</button><button class="icon-btn" onclick="showToast('Demo profile settings')">⚙</button></div></header>
+
+<div class="container">
+<section class="page active" id="dashboard">
+  <div class="hero">
+    <span class="badge">● SMART INDIA HACKATHON 2026 · PS 26238</span>
+    <h1>One place for every tribal scholarship journey.</h1>
+    <p>TribalSetu brings Pre-Matric, Post-Matric, Top Class, NFST and NOS into one mobile-first experience for discovery, applications, documents, status and payment visibility.</p>
+    <div class="cta-row"><button class="btn primary" onclick="go('schemes')">Explore scholarships</button><button class="btn ghost" onclick="go('applications')">Track applications</button></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="label">Active applications</span><strong>3</strong><span class="trend">● 2 verified</span></div>
+    <div class="stat"><span class="label">Documents ready</span><strong>8/10</strong><span class="trend">● 80% complete</span></div>
+    <div class="stat"><span class="label">Payment status</span><strong>₹24,000</strong><span class="trend">● received</span></div>
+    <div class="stat"><span class="label">Alerts</span><strong>2</strong><span class="trend" style="color:var(--amber)">● action needed</span></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="section-head"><div><h2>Application journey</h2><p>Unified view across connected scholarship systems</p></div><button class="link" onclick="go('applications')">View all</button></div>
+      <div class="timeline">
+        <div class="step done"><div class="dot">✓</div><div><b>Profile & eligibility</b><small>Basic details verified</small></div></div>
+        <div class="step done"><div class="dot">✓</div><div><b>Documents submitted</b><small>8 documents accepted</small></div></div>
+        <div class="step current"><div class="dot">•</div><div><b>Institution verification</b><small>One application awaiting review</small></div></div>
+        <div class="step"><div class="dot">4</div><div><b>Ministry verification</b><small>Pending</small></div></div>
+        <div class="step"><div class="dot">5</div><div><b>Disbursement</b><small>Payment will appear here</small></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-head"><div><h2>Action center</h2><p>Things that may need your attention</p></div></div>
+      <div class="alert"><div class="alert-icon">!</div><div><b>Certificate nearing expiry</b><p>Renew your income certificate before submission.</p></div></div>
+      <div class="alert"><div class="alert-icon">⌁</div><div><b>Institution review</b><p>Your Post-Matric application is in verification.</p></div></div>
+      <div class="alert"><div class="alert-icon">✓</div><div><b>Payment received</b><p>Recent disbursement is visible in Payments.</p></div></div>
+    </div>
+  </div>
+  <div class="section-head"><div><h2>Scholarship schemes</h2><p>Five Ministry of Tribal Affairs schemes in one interface</p></div><button class="link" onclick="go('schemes')">See all schemes →</button></div>
+  <div class="scheme-grid">
+    <div class="scheme"><div class="scheme-icon">01</div><h3>Pre-Matric</h3><p>Scholarship journey for eligible school-level ST students.</p><span class="tag">Eligibility check available</span></div>
+    <div class="scheme"><div class="scheme-icon">02</div><h3>Post-Matric</h3><p>Unified application and verification tracking for post-matric study.</p><span class="tag">Track application</span></div>
+    <div class="scheme"><div class="scheme-icon">03</div><h3>Top Class</h3><p>Discover and monitor the Top Class scholarship pathway.</p><span class="tag">Explore scheme</span></div>
+    <div class="scheme"><div class="scheme-icon">04</div><h3>NFST</h3><p>National Fellowship for ST students with centralized status visibility.</p><span class="tag">Explore scheme</span></div>
+    <div class="scheme"><div class="scheme-icon">05</div><h3>NOS</h3><p>National Overseas Scholarship information and application journey.</p><span class="tag">Explore scheme</span></div>
+  </div>
+</section>
+
+<section class="page" id="schemes">
+  <div class="section-head"><div><h1>Scholarship schemes</h1><p>Compare the five schemes supported by the TribalSetu concept.</p></div></div>
+  <div class="search"><input id="schemeSearch" placeholder="Search a scholarship scheme..." oninput="filterSchemes()"></div>
+  <div class="scheme-grid" id="schemeGrid">
+    <div class="scheme" data-name="pre matric"><div class="scheme-icon">01</div><h3>Pre-Matric Scholarship</h3><p>For the pre-matric scholarship journey described in the problem statement.</p><button class="btn" onclick="showToast('Eligibility checker opened in demo mode')">Check eligibility</button></div>
+    <div class="scheme" data-name="post matric"><div class="scheme-icon">02</div><h3>Post-Matric Scholarship</h3><p>Track application, institution verification, ministry verification and payment in one view.</p><button class="btn" onclick="showToast('Application flow opened in demo mode')">Start application</button></div>
+    <div class="scheme" data-name="top class"><div class="scheme-icon">03</div><h3>Top Class</h3><p>Centralized discovery and status visibility for the Top Class scheme.</p><button class="btn" onclick="showToast('Scheme details opened')">View details</button></div>
+    <div class="scheme" data-name="nfst national fellowship"><div class="scheme-icon">04</div><h3>National Fellowship (NFST)</h3><p>Keep fellowship status and related updates visible alongside other scholarship journeys.</p><button class="btn" onclick="showToast('NFST details opened')">View details</button></div>
+    <div class="scheme" data-name="nos national overseas scholarship"><div class="scheme-icon">05</div><h3>National Overseas Scholarship (NOS)</h3><p>Bring the standalone NOS journey into the same unified student experience.</p><button class="btn" onclick="showToast('NOS details opened')">View details</button></div>
+  </div>
+</section>
+
+<section class="page" id="applications">
+  <div class="section-head"><div><h1>My applications</h1><p>One view across connected scholarship portals.</p></div><button class="btn" onclick="go('schemes')">+ New application</button></div>
+  <div class="card table-wrap"><table class="table"><thead><tr><th>Scheme</th><th>Application ID</th><th>Current stage</th><th>Status</th><th>Last update</th></tr></thead><tbody>
+    <tr><td><b>Post-Matric</b></td><td>PM-2026-1842</td><td>Institution verification</td><td><span class="status review">Under review</span></td><td>Today</td></tr>
+    <tr><td><b>Top Class</b></td><td>TC-2026-0711</td><td>Ministry verification</td><td><span class="status pending">In progress</span></td><td>2 days ago</td></tr>
+    <tr><td><b>Pre-Matric</b></td><td>PR-2026-3320</td><td>Disbursement</td><td><span class="status approved">Approved</span></td><td>5 days ago</td></tr>
+  </tbody></table></div>
+  <div class="section-head"><div><h2>How status is handled</h2><p>Demo UI reflects the deck's API-grounded status principle.</p></div></div>
+  <div class="feature-grid">
+    <div class="feature card"><div class="n">01 · CONNECT</div><h3>Source-aware adapters</h3><p>Each connected source can be integrated independently without replacing existing government portals.</p></div>
+    <div class="feature card"><div class="n">02 · VERIFY</div><h3>Grounded responses</h3><p>Status and payment messages are designed to come from source data rather than invented AI responses.</p></div>
+    <div class="feature card"><div class="n">03 · ESCALATE</div><h3>Human review queue</h3><p>Uncertain identity/entity matches can be routed for practical human verification.</p></div>
+  </div>
+</section>
+
+<section class="page" id="documents">
+  <div class="section-head"><div><h1>Documents</h1><p>Reduce repetitive document submission with one organized document vault.</p></div><button class="btn" onclick="showToast('Upload dialog is a frontend demo')">+ Upload</button></div>
+  <div class="card">
+    <div class="checklist">
+      <label class="check"><input type="checkbox" checked> Identity document <span class="status approved">Verified</span></label>
+      <label class="check"><input type="checkbox" checked> Caste / ST certificate <span class="status approved">Verified</span></label>
+      <label class="check"><input type="checkbox" checked> Income certificate <span class="status approved">Verified</span></label>
+      <label class="check"><input type="checkbox" checked> Bank details <span class="status approved">Verified</span></label>
+      <label class="check"><input type="checkbox"> Institution certificate <span class="status review">Action needed</span></label>
+      <label class="check"><input type="checkbox"> Additional scheme document <span class="status pending">Pending</span></label>
+    </div>
+  </div>
+  <div class="section-head"><div><h2>Secure document handling</h2><p>Designed around minimum-necessary data and secure document handling.</p></div></div>
+  <div class="feature-grid"><div class="feature card"><div class="n">RBAC</div><h3>Role-based access</h3><p>Student, institution and ministry experiences can use different access boundaries.</p></div><div class="feature card"><div class="n">SECURITY</div><h3>Encryption & audit</h3><p>Protect sensitive scholarship and identity data with encryption and audit trails.</p></div><div class="feature card"><div class="n">CONTROL</div><h3>Rate limiting</h3><p>Designed to reduce abuse and protect connected services.</p></div></div>
+</section>
+
+<section class="page" id="payments">
+  <div class="section-head"><div><h1>Payments</h1><p>Single view of scholarship disbursement information.</p></div></div>
+  <div class="stats"><div class="stat"><span class="label">Received</span><strong>₹24,000</strong><span class="trend">● Confirmed in demo</span></div><div class="stat"><span class="label">Pending</span><strong>₹18,000</strong><span class="trend" style="color:var(--amber)">● Awaiting stage</span></div><div class="stat"><span class="label">Applications</span><strong>3</strong><span class="trend">● Tracked</span></div><div class="stat"><span class="label">Sources</span><strong>3</strong><span class="trend">● Connected/mocked</span></div></div>
+  <div class="card table-wrap"><table class="table"><thead><tr><th>Scheme</th><th>Reference</th><th>Amount</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td>Pre-Matric</td><td>PAY-3320</td><td>₹24,000</td><td><span class="status approved">Received</span></td><td>Connected source</td></tr><tr><td>Post-Matric</td><td>PAY-1842</td><td>₹18,000</td><td><span class="status pending">Pending</span></td><td>Connected source</td></tr></tbody></table></div>
+</section>
+
+<section class="page" id="alerts">
+  <div class="section-head"><div><h1>Alerts & reminders</h1><p>Timely deficiency and expiry notifications.</p></div></div>
+  <div class="card">
+    <div class="alert"><div class="alert-icon">!</div><div><b>Income certificate expiry</b><p>Your document is approaching expiry. Review it before submitting a new application.</p></div></div>
+    <div class="alert"><div class="alert-icon">⌁</div><div><b>Institution verification pending</b><p>One application is waiting for institutional verification.</p></div></div>
+    <div class="alert"><div class="alert-icon">✓</div><div><b>Payment update</b><p>A disbursement status has been updated in your unified view.</p></div></div>
+  </div>
+</section>
+
+<section class="page" id="ministry">
+  <div class="section-head"><div><h1>Ministry / institution view</h1><p>Exception-focused visibility across scholarship schemes.</p></div></div>
+  <div class="stats"><div class="stat"><span class="label">Applications visible</span><strong>12.8K</strong><span class="trend">● Demo metric</span></div><div class="stat"><span class="label">Auto / semi-auto verified</span><strong>78%</strong><span class="trend">● Demo metric</span></div><div class="stat"><span class="label">Exception queue</span><strong>184</strong><span class="trend" style="color:var(--amber)">● Demo metric</span></div><div class="stat"><span class="label">Potential unreached</span><strong>312</strong><span class="trend">● Demo metric</span></div></div>
+  <div class="grid2"><div class="card"><h2>Operational bottlenecks</h2><p style="color:var(--muted);font-size:13px">Conceptual analytics for delays and coverage.</p><div style="margin-top:18px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>Institution verification</span><b>64%</b></div><div class="progress"><i style="width:64%"></i></div></div><div style="margin-top:18px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>Ministry verification</span><b>42%</b></div><div class="progress"><i style="width:42%"></i></div></div><div style="margin-top:18px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>Disbursement visibility</span><b>81%</b></div><div class="progress"><i style="width:81%"></i></div></div></div>
+  <div class="card"><h2>Exception queue</h2><div class="alert"><div class="alert-icon">?</div><div><b>Uncertain entity match</b><p>Route to human review instead of guessing.</p></div></div><div class="alert"><div class="alert-icon">!</div><div><b>API unavailable</b><p>Use a clearly labelled source status and retry path.</p></div></div><div class="alert"><div class="alert-icon">▣</div><div><b>OCR quality issue</b><p>Request a clearer document when extraction confidence is low.</p></div></div></div></div>
+</section>
+
+<section class="page" id="about">
+  <div class="section-head"><div><h1>How TribalSetu works</h1><p>The architecture and safeguards represented in the Tech Titans concept.</p></div></div>
+  <div class="card"><div class="arch"><div class="arch-box">Student App</div><div class="arrow">→</div><div class="arch-box">TribalSetu<br>Adapter Layer</div><div class="arrow">→</div><div class="arch-box">Existing Portals<br>& Data Sources</div></div></div>
+  <div class="section-head"><div><h2>Feasibility & safeguards</h2><p>These are implementation principles from the pitch deck.</p></div></div>
+  <div class="feature-grid">
+    <div class="feature card"><div class="n">FEASIBILITY</div><h3>Integration-first</h3><p>Preserve existing government scholarship portals and connect each source independently through adapters.</p></div>
+    <div class="feature card"><div class="n">RULES</div><h3>Configurable eligibility</h3><p>Keep scheme rules configurable rather than hard-coded, so policy changes can be handled more safely.</p></div>
+    <div class="feature card"><div class="n">TRUST</div><h3>API-grounded status</h3><p>Prevent the AI from inventing application or payment status; show source-backed information.</p></div>
+    <div class="feature card"><div class="n">HUMAN-IN-LOOP</div><h3>Review uncertain matches</h3><p>Low-confidence entity matching can enter a human review queue.</p></div>
+    <div class="feature card"><div class="n">RISK</div><h3>Restricted production access</h3><p>Use authorized APIs, sandbox environments or clearly labelled mock adapters during demonstrations.</p></div>
+    <div class="feature card"><div class="n">RISK</div><h3>Privacy & security</h3><p>Use minimum-necessary data, RBAC, encryption, secure document handling, audit trails and rate limiting.</p></div>
+  </div>
+  <div class="section-head"><div><h2>Reference ecosystem</h2><p>The deck identifies these sources for the concept.</p></div></div>
+  <div class="scheme-grid">
+    <div class="scheme"><h3>National Scholarship Portal</h3><p>Reference system named in the presentation.</p></div>
+    <div class="scheme"><h3>Scholarship & Fellowship Management Portal</h3><p>Reference system named in the presentation.</p></div>
+    <div class="scheme"><h3>National Overseas Scholarship</h3><p>Standalone reference portal named in the presentation.</p></div>
+    <div class="scheme"><h3>DigiLocker</h3><p>Reference ecosystem for the concept.</p></div>
+    <div class="scheme"><h3>Institutional Sources</h3><p>Reference category named in the presentation.</p></div>
+  </div>
+</section>
+</div>
+</main>
+</div>
+
+<div class="jago">
+  <div class="chat" id="chat"><div class="chat-head"><b>JAGO</b><div style="font-size:11px;color:#b8d0e3">Multilingual scholarship assistant · demo</div></div><div class="chat-body" id="chatBody"><div class="msg bot">Namaste! I can help you understand the scholarship journey, documents and application status. What would you like to know?</div></div><div class="chat-input"><input id="chatInput" placeholder="Ask JAGO..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">→</button></div></div>
+  <button onclick="document.getElementById('chat').classList.toggle('open')" aria-label="Open JAGO">✦</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const labels={dashboard:"Dashboard",schemes:"Scholarship Schemes",applications:"My Applications",documents:"Documents",payments:"Payments",alerts:"Alerts",ministry:"Ministry View",about:"How TribalSetu Works"};
+function go(page){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ document.getElementById(page).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
+ document.getElementById("crumb").textContent=labels[page];
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>t.style.display="none",2600)}
+function filterSchemes(){const q=document.getElementById("schemeSearch").value.toLowerCase();document.querySelectorAll("#schemeGrid .scheme").forEach(x=>x.style.display=x.dataset.name.includes(q)?"block":"none")}
+function sendChat(){
+ const input=document.getElementById("chatInput"), body=document.getElementById("chatBody"), q=input.value.trim(); if(!q)return;
+ body.innerHTML += `<div class="msg me">${q.replace(/[<>&]/g,s=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[s]))}</div>`;
+ input.value="";
+ setTimeout(()=>{body.innerHTML += `<div class="msg bot">This is a frontend demo. In production, JAGO should answer from verified scheme rules and connected source data, with multilingual support and no invented application or payment status.</div>`;body.scrollTop=body.scrollHeight},450);
+}
+</script>
+</body>
+</html>
